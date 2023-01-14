@@ -1,6 +1,15 @@
 import PySimpleGUI as sg
 
-layout = []
+table_content = []
+
+layout = [
+    [sg.Table(
+        headings = ['Observation', 'Result'], 
+        values = table_content, 
+        expand_x=True, 
+        hide_vertical_scroll=True,
+        key = '-TABLE-')]
+]
 
 window = sg.Window('Graph App', layout)
 
