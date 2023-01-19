@@ -2,6 +2,14 @@ import PySimpleGUI as sg
 import matplotlib
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+def update_figure(data):
+    axes = fig.axes
+    x = [i[0] for i in data]
+    y = [int(i[1]) for i in data]
+    axes[0].plot(x,y,'r-')
+    figure_canvas_agg.draw()
+    figure_canvas_agg.get_tk_widget().pack()
+
 sg.theme('DarkTea16')
 table_content = []
 layout = [
@@ -34,5 +42,6 @@ while True:
             table_content.append([len(table_content) + 1,float(new_value)])
             window['-TABLE-'].update(table_content)
             window['-INPUT-'].update('')
+            
 
 window.close()
