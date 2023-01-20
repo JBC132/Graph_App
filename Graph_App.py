@@ -6,11 +6,11 @@ def update_figure(data):
     axes = fig.axes
     x = [i[0] for i in data]
     y = [int(i[1]) for i in data]
-    axes[0].plot(x,y,'r-')
+    axes[0].plot(x,y,'r-') # r- means red. g-, r*, ...
     figure_canvas_agg.draw()
     figure_canvas_agg.get_tk_widget().pack()
 
-sg.theme('DarkTea16')
+# sg.theme('DarkTea16')
 table_content = []
 layout = [
     [sg.Table(
@@ -25,9 +25,11 @@ layout = [
 
 window = sg.Window('Graph App', layout, finalize = True)
 
+# matplotlib
 fig = matplotlib.figure.Figure(figsize = (5,4))
+# module 'matplotlib' has no attribute 'figure' <-- ??
 fig.add_subplot(111).plot([],[])
-figure_canvas_agg = FigureCanvasTkAgg(fig, window['-CANVAS-'].TKCanvas)
+figure_canvas_agg = FigureCanvasTkAgg(fig,window['-CANVAS-'].TKCanvas)
 figure_canvas_agg.draw()
 figure_canvas_agg.get_tk_widget().pack()
 
@@ -42,6 +44,6 @@ while True:
             table_content.append([len(table_content) + 1,float(new_value)])
             window['-TABLE-'].update(table_content)
             window['-INPUT-'].update('')
-            
+            update_figure(table_content)            
 
 window.close()
